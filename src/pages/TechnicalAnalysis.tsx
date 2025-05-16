@@ -147,8 +147,8 @@ const TechnicalAnalysis = () => {
                 <ul>
                   <li>The "body" shows the opening and closing prices</li>
                   <li>The "wicks" or "shadows" show the high and low prices</li>
-                  <li>Green/white candles indicate price increased during that period (close > open)</li>
-                  <li>Red/black candles indicate price decreased during that period (close < open)</li>
+                  <li>Green/white candles indicate price increased during that period (close &gt; open)</li>
+                  <li>Red/black candles indicate price decreased during that period (close &lt; open)</li>
                 </ul>
                 
                 <h3>Timeframes</h3>
