@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import CoinDetail from "./pages/CoinDetail";
 import Learn from "./pages/Learn";
+import BlockchainFundamentals from "./pages/BlockchainFundamentals";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/coin/:id" element={<CoinDetail />} />
           <Route path="/learn" element={<Learn />} />
+          <Route path="/learn/blockchain-fundamentals" element={<BlockchainFundamentals />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
