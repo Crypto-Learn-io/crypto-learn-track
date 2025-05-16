@@ -26,9 +26,9 @@ const NftBasics = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       {/* Course Header */}
-      <header className="bg-white border-b sticky top-0 z-10">
+      <header className="bg-card border-b sticky top-0 z-10">
         <div className="container px-4 py-3 flex justify-between items-center">
           <Link to="/learn" className="flex items-center text-sm font-medium text-muted-foreground hover:text-primary">
             <ChevronLeft className="h-4 w-4 mr-1" />
@@ -45,7 +45,7 @@ const NftBasics = () => {
       </header>
       
       {/* Course Progress */}
-      <div className="bg-white border-b">
+      <div className="bg-card border-b">
         <div className="container px-4 py-2">
           <Progress value={progress} className="h-2" />
         </div>
@@ -55,7 +55,7 @@ const NftBasics = () => {
       <div className="container px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Course Sidebar */}
         <div className="md:col-span-1">
-          <div className="sticky top-[85px] bg-white rounded-lg border p-4">
+          <div className="sticky top-[85px] bg-card rounded-lg border p-4">
             <h2 className="font-semibold flex items-center mb-4 text-primary">
               <Book className="h-4 w-4 mr-2" />
               Course Contents
@@ -83,20 +83,20 @@ const NftBasics = () => {
         </div>
         
         {/* Module Content */}
-        <div className="md:col-span-3 bg-white rounded-lg border p-6">
+        <div className="md:col-span-3 bg-card rounded-lg border p-6">
           {currentModule === 1 && (
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold">What Are NFTs?</h1>
-                <p className="text-muted-foreground">Understanding non-fungible tokens and how they work</p>
+            <div className="course-module">
+              <div className="course-module-header">
+                <h1 className="course-title">What Are NFTs?</h1>
+                <p className="course-description">Understanding non-fungible tokens and how they work</p>
               </div>
               
-              <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center">
+              <div className="video-placeholder">
                 <GraduationCap className="h-12 w-12 text-muted-foreground" />
                 <span className="ml-2 text-muted-foreground">Video Lecture Placeholder</span>
               </div>
               
-              <div className="prose max-w-none">
+              <div className="course-content">
                 <h2>Understanding NFTs</h2>
                 <p>
                   NFT stands for Non-Fungible Token. Unlike cryptocurrencies such as Bitcoin or Ethereum, which are fungible (one unit is identical to another), 
@@ -143,7 +143,7 @@ const NftBasics = () => {
                   <li>Magic Eden</li>
                 </ul>
                 
-                <Accordion type="single" collapsible className="mt-6">
+                <Accordion type="single" collapsible className="course-faq">
                   <AccordionItem value="faq-1">
                     <AccordionTrigger>Can't I just screenshot an NFT instead of buying it?</AccordionTrigger>
                     <AccordionContent>
@@ -159,7 +159,7 @@ const NftBasics = () => {
                 </Accordion>
               </div>
               
-              <div className="flex justify-between pt-6 border-t">
+              <div className="course-navigation">
                 <div></div>
                 <Button onClick={() => handleModuleComplete(1)}>
                   Next Module
@@ -170,13 +170,13 @@ const NftBasics = () => {
           )}
           
           {currentModule === 2 && (
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold">Creating and Collecting NFTs</h1>
-                <p className="text-muted-foreground">How to create, buy, sell, and collect NFTs</p>
+            <div className="course-module">
+              <div className="course-module-header">
+                <h1 className="course-title">Creating and Collecting NFTs</h1>
+                <p className="course-description">How to create, buy, sell, and collect NFTs</p>
               </div>
               
-              <div className="prose max-w-none">
+              <div className="course-content">
                 <h2>Creating NFTs (Minting)</h2>
                 <p>
                   "Minting" is the process of converting a digital file into a digital asset stored on the blockchain.
@@ -223,7 +223,7 @@ const NftBasics = () => {
                 </ul>
               </div>
               
-              <div className="flex justify-between pt-6 border-t">
+              <div className="course-navigation">
                 <Button variant="outline" onClick={() => setCurrentModule(1)}>
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Previous Module
@@ -237,13 +237,13 @@ const NftBasics = () => {
           )}
           
           {currentModule === 3 && (
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold">NFT Use Cases</h1>
-                <p className="text-muted-foreground">Exploring the practical applications of NFT technology</p>
+            <div className="course-module">
+              <div className="course-module-header">
+                <h1 className="course-title">NFT Use Cases</h1>
+                <p className="course-description">Exploring the practical applications of NFT technology</p>
               </div>
               
-              <div className="prose max-w-none">
+              <div className="course-content">
                 <h2>Beyond Digital Art: The Many Applications of NFTs</h2>
                 <p>
                   While digital art and collectibles have dominated NFT headlines, the technology's potential extends far beyond these use cases.
@@ -307,7 +307,7 @@ const NftBasics = () => {
                 </ul>
               </div>
               
-              <div className="flex justify-between pt-6 border-t">
+              <div className="course-navigation">
                 <Button variant="outline" onClick={() => setCurrentModule(2)}>
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Previous Module

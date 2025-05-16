@@ -26,9 +26,9 @@ const TradingBasics = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       {/* Course Header */}
-      <header className="bg-white border-b sticky top-0 z-10">
+      <header className="bg-card border-b sticky top-0 z-10">
         <div className="container px-4 py-3 flex justify-between items-center">
           <Link to="/learn" className="flex items-center text-sm font-medium text-muted-foreground hover:text-primary">
             <ChevronLeft className="h-4 w-4 mr-1" />
@@ -45,7 +45,7 @@ const TradingBasics = () => {
       </header>
       
       {/* Course Progress */}
-      <div className="bg-white border-b">
+      <div className="bg-card border-b">
         <div className="container px-4 py-2">
           <Progress value={progress} className="h-2" />
         </div>
@@ -55,7 +55,7 @@ const TradingBasics = () => {
       <div className="container px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Course Sidebar */}
         <div className="md:col-span-1">
-          <div className="sticky top-[85px] bg-white rounded-lg border p-4">
+          <div className="sticky top-[85px] bg-card rounded-lg border p-4">
             <h2 className="font-semibold flex items-center mb-4 text-primary">
               <Book className="h-4 w-4 mr-2" />
               Course Contents
@@ -85,20 +85,20 @@ const TradingBasics = () => {
         </div>
         
         {/* Module Content */}
-        <div className="md:col-span-3 bg-white rounded-lg border p-6">
+        <div className="md:col-span-3 bg-card rounded-lg border p-6">
           {currentModule === 1 && (
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold">Introduction to Trading</h1>
-                <p className="text-muted-foreground">Learn the fundamentals of cryptocurrency trading</p>
+            <div className="course-module">
+              <div className="course-module-header">
+                <h1 className="course-title">Introduction to Trading</h1>
+                <p className="course-description">Learn the fundamentals of cryptocurrency trading</p>
               </div>
               
-              <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center">
+              <div className="video-placeholder">
                 <GraduationCap className="h-12 w-12 text-muted-foreground" />
                 <span className="ml-2 text-muted-foreground">Video Lecture Placeholder</span>
               </div>
               
-              <div className="prose max-w-none">
+              <div className="course-content">
                 <h2>What is Crypto Trading?</h2>
                 <p>
                   Cryptocurrency trading is the act of buying and selling digital currencies to potentially make a profit. 
@@ -124,7 +124,7 @@ const TradingBasics = () => {
                   <li><strong>Hybrid Exchanges:</strong> Combine features of both centralized and decentralized exchanges.</li>
                 </ul>
                 
-                <Accordion type="single" collapsible className="mt-6">
+                <Accordion type="single" collapsible className="course-faq">
                   <AccordionItem value="faq-1">
                     <AccordionTrigger>Is cryptocurrency trading risky?</AccordionTrigger>
                     <AccordionContent>
@@ -140,7 +140,7 @@ const TradingBasics = () => {
                 </Accordion>
               </div>
               
-              <div className="flex justify-between pt-6 border-t">
+              <div className="course-navigation">
                 <div></div>
                 <Button onClick={() => handleModuleComplete(1)}>
                   Next Module
@@ -151,13 +151,13 @@ const TradingBasics = () => {
           )}
           
           {currentModule === 2 && (
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold">Market Analysis Basics</h1>
-                <p className="text-muted-foreground">Understanding key analysis methods for cryptocurrency markets</p>
+            <div className="course-module">
+              <div className="course-module-header">
+                <h1 className="course-title">Market Analysis Basics</h1>
+                <p className="course-description">Understanding key analysis methods for cryptocurrency markets</p>
               </div>
               
-              <div className="prose max-w-none">
+              <div className="course-content">
                 <h2>Fundamental vs Technical Analysis</h2>
                 <p>
                   In cryptocurrency trading, there are two primary approaches to analyzing markets:
@@ -199,7 +199,7 @@ const TradingBasics = () => {
                 </ul>
               </div>
               
-              <div className="flex justify-between pt-6 border-t">
+              <div className="course-navigation">
                 <Button variant="outline" onClick={() => setCurrentModule(1)}>
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Previous Module
@@ -213,13 +213,13 @@ const TradingBasics = () => {
           )}
           
           {currentModule > 2 && (
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold">
+            <div className="course-module">
+              <div className="course-module-header">
+                <h1 className="course-title">
                   {currentModule === 3 ? "Trading Strategies" : 
                    currentModule === 4 ? "Risk Management" : "Trading Psychology"}
                 </h1>
-                <p className="text-muted-foreground">
+                <p className="course-description">
                   {currentModule === 3 ? "Learn effective cryptocurrency trading strategies" : 
                    currentModule === 4 ? "Protect your investments with proper risk management" : 
                    "Master the mental aspects of successful trading"}
@@ -234,7 +234,7 @@ const TradingBasics = () => {
                 </div>
               </div>
               
-              <div className="flex justify-between pt-6 border-t">
+              <div className="course-navigation">
                 <Button variant="outline" onClick={() => setCurrentModule(currentModule - 1)}>
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Previous Module

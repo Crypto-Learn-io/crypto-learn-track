@@ -26,9 +26,9 @@ const TechnicalAnalysis = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       {/* Course Header */}
-      <header className="bg-white border-b sticky top-0 z-10">
+      <header className="bg-card border-b sticky top-0 z-10">
         <div className="container px-4 py-3 flex justify-between items-center">
           <Link to="/learn" className="flex items-center text-sm font-medium text-muted-foreground hover:text-primary">
             <ChevronLeft className="h-4 w-4 mr-1" />
@@ -45,7 +45,7 @@ const TechnicalAnalysis = () => {
       </header>
       
       {/* Course Progress */}
-      <div className="bg-white border-b">
+      <div className="bg-card border-b">
         <div className="container px-4 py-2">
           <Progress value={progress} className="h-2" />
         </div>
@@ -55,7 +55,7 @@ const TechnicalAnalysis = () => {
       <div className="container px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Course Sidebar */}
         <div className="md:col-span-1">
-          <div className="sticky top-[85px] bg-white rounded-lg border p-4">
+          <div className="sticky top-[85px] bg-card rounded-lg border p-4">
             <h2 className="font-semibold flex items-center mb-4 text-primary">
               <Book className="h-4 w-4 mr-2" />
               Course Contents
@@ -84,20 +84,20 @@ const TechnicalAnalysis = () => {
         </div>
         
         {/* Module Content */}
-        <div className="md:col-span-3 bg-white rounded-lg border p-6">
+        <div className="md:col-span-3 bg-card rounded-lg border p-6">
           {currentModule === 1 && (
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold">Understanding Charts</h1>
-                <p className="text-muted-foreground">Learn to read and interpret different types of price charts</p>
+            <div className="course-module">
+              <div className="course-module-header">
+                <h1 className="course-title">Understanding Charts</h1>
+                <p className="course-description">Learn to read and interpret different types of price charts</p>
               </div>
               
-              <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center">
+              <div className="video-placeholder">
                 <GraduationCap className="h-12 w-12 text-muted-foreground" />
                 <span className="ml-2 text-muted-foreground">Video Lecture Placeholder</span>
               </div>
               
-              <div className="prose max-w-none">
+              <div className="course-content">
                 <h2>Introduction to Technical Analysis</h2>
                 <p>
                   Technical analysis is a trading discipline that evaluates investments and identifies trading opportunities by analyzing 
@@ -161,7 +161,7 @@ const TechnicalAnalysis = () => {
                   <li><strong>Long timeframes</strong> (1W, 1M): Used by position traders and investors</li>
                 </ul>
                 
-                <Accordion type="single" collapsible className="mt-6">
+                <Accordion type="single" collapsible className="course-faq">
                   <AccordionItem value="faq-1">
                     <AccordionTrigger>Why do different timeframes sometimes show conflicting signals?</AccordionTrigger>
                     <AccordionContent>
@@ -177,7 +177,7 @@ const TechnicalAnalysis = () => {
                 </Accordion>
               </div>
               
-              <div className="flex justify-between pt-6 border-t">
+              <div className="course-navigation">
                 <div></div>
                 <Button onClick={() => handleModuleComplete(1)}>
                   Next Module
@@ -188,13 +188,13 @@ const TechnicalAnalysis = () => {
           )}
           
           {currentModule === 2 && (
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold">Key Chart Patterns</h1>
-                <p className="text-muted-foreground">Recognizing important patterns for trading decisions</p>
+            <div className="course-module">
+              <div className="course-module-header">
+                <h1 className="course-title">Key Chart Patterns</h1>
+                <p className="course-description">Recognizing important patterns for trading decisions</p>
               </div>
               
-              <div className="prose max-w-none">
+              <div className="course-content">
                 <h2>Chart Patterns in Technical Analysis</h2>
                 <p>
                   Chart patterns are specific formations created by price movements that can help traders predict future price direction. 
@@ -260,7 +260,7 @@ const TechnicalAnalysis = () => {
                 </ul>
               </div>
               
-              <div className="flex justify-between pt-6 border-t">
+              <div className="course-navigation">
                 <Button variant="outline" onClick={() => setCurrentModule(1)}>
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Previous Module
@@ -274,12 +274,12 @@ const TechnicalAnalysis = () => {
           )}
           
           {currentModule > 2 && (
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold">
+            <div className="course-module">
+              <div className="course-module-header">
+                <h1 className="course-title">
                   {currentModule === 3 ? "Technical Indicators" : "Building a Trading Strategy"}
                 </h1>
-                <p className="text-muted-foreground">
+                <p className="course-description">
                   {currentModule === 3 ? "Using mathematical calculations to analyze market conditions" : 
                    "Combining chart patterns and indicators into an effective trading plan"}
                 </p>
@@ -293,7 +293,7 @@ const TechnicalAnalysis = () => {
                 </div>
               </div>
               
-              <div className="flex justify-between pt-6 border-t">
+              <div className="course-navigation">
                 <Button variant="outline" onClick={() => setCurrentModule(currentModule - 1)}>
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Previous Module

@@ -110,7 +110,7 @@
     @apply text-crypto-red;
   }
 
-  /* Add these new classes for learning content */
+  /* Learning content styling */
   .course-title {
     @apply text-3xl font-bold text-foreground;
   }
@@ -120,10 +120,26 @@
   }
   
   .course-content {
-    @apply prose max-w-none text-foreground;
+    @apply prose prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-li:text-foreground max-w-none;
   }
   
   .video-placeholder {
-    @apply aspect-video bg-slate-100 rounded-lg flex items-center justify-center;
+    @apply aspect-video bg-muted rounded-lg flex items-center justify-center;
+  }
+  
+  .course-module {
+    @apply space-y-6;
+  }
+  
+  .course-module-header {
+    @apply space-y-2;
+  }
+  
+  .course-navigation {
+    @apply flex justify-between pt-6 border-t;
+  }
+  
+  .course-faq {
+    @apply mt-6;
   }
 }
