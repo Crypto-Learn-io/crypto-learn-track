@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Coin, BookOpen } from "lucide-react";
+import { Coins, BookOpen } from "lucide-react";
 import { learningContent } from "@/data/learningContent";
 
 interface SearchResultsProps {
@@ -74,7 +74,7 @@ const SearchResults = ({ query }: SearchResultsProps) => {
                     className="flex items-center justify-between p-2 rounded-md hover:bg-secondary/50 transition-colors"
                   >
                     <div className="flex items-center">
-                      <Coin className="h-5 w-5 mr-3 text-muted-foreground" />
+                      <Coins className="h-5 w-5 mr-3 text-muted-foreground" />
                       <div>
                         <div className="font-medium">{coin.name} ({coin.symbol})</div>
                         <div className="text-sm text-muted-foreground">{coin.price}</div>
@@ -124,7 +124,7 @@ const SearchResults = ({ query }: SearchResultsProps) => {
                   className="flex items-center justify-between p-2 rounded-md hover:bg-secondary/50 transition-colors"
                 >
                   <div className="flex items-center">
-                    <Coin className="h-5 w-5 mr-3 text-muted-foreground" />
+                    <Coins className="h-5 w-5 mr-3 text-muted-foreground" />
                     <div>
                       <div className="font-medium">{coin.name} ({coin.symbol})</div>
                       <div className="text-sm text-muted-foreground">{coin.price}</div>
