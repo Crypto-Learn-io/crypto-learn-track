@@ -109,8 +109,37 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'pulse-gentle': 'pulse-gentle 2s infinite',
 				'fade-in': 'fade-in 0.3s ease-out',
-			}
+			},
+			typography: {
+				DEFAULT: {
+					css: {
+						color: 'inherit',
+						a: {
+							color: 'hsl(var(--primary))',
+							'&:hover': {
+								color: 'hsl(var(--primary))',
+							},
+						},
+						'h1, h2, h3, h4': {
+							color: 'inherit',
+						},
+						'strong, b': {
+							color: 'inherit',
+						},
+						li: {
+							color: 'inherit',
+						},
+						blockquote: {
+							color: 'inherit',
+						},
+					},
+				},
+			},
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		require("@tailwindcss/typography")
+	],
 } satisfies Config;
+
