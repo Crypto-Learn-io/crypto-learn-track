@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Search, BookOpen, TrendingUp, User } from "lucide-react";
+import { Search, BookOpen, TrendingUp, User, Mail } from "lucide-react";
 
 const Header = () => {
   const location = useLocation();
@@ -37,6 +37,12 @@ const Header = () => {
           >
             Learn
           </Link>
+          <Link 
+            to="/contact" 
+            className={`text-sm font-medium transition-colors hover:text-primary ${isActive('/contact') ? 'text-primary' : 'text-muted-foreground'}`}
+          >
+            Contact
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -60,6 +66,12 @@ const Header = () => {
           <Button variant="ghost" size="icon" asChild>
             <Link to="/learn">
               <BookOpen className="h-5 w-5" />
+            </Link>
+          </Button>
+          
+          <Button variant="ghost" size="icon" asChild>
+            <Link to="/contact">
+              <Mail className="h-5 w-5" />
             </Link>
           </Button>
           

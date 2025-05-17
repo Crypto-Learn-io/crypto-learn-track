@@ -13,6 +13,7 @@ import CryptoWallets from "./pages/CryptoWallets";
 import DefiExplained from "./pages/DefiExplained";
 import NftBasics from "./pages/NftBasics";
 import TechnicalAnalysis from "./pages/TechnicalAnalysis";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/learn/defi-explained" element={<DefiExplained />} />
           <Route path="/learn/nft-basics" element={<NftBasics />} />
           <Route path="/learn/technical-analysis" element={<TechnicalAnalysis />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
