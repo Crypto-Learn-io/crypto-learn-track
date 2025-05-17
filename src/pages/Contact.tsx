@@ -31,9 +31,9 @@ const Contact = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="font-medium">---@gmail.com</p>
+              <p className="font-medium">cryptoleaner.co@gmail.com</p>
               <Button className="mt-4" asChild>
-                <a href="mailto:---@gmail.com">
+                <a href="mailto:cryptoleaner.co@gmail.com">
                   Send Email
                 </a>
               </Button>
