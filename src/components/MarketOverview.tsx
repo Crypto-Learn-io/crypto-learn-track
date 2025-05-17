@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -120,7 +119,7 @@ const MarketOverview = () => {
       <CardContent>
         <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
-            {chartType === "area" && (
+            {chartType === "area" ? (
               <RechartsAreaChart
                 data={historicalData}
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
@@ -159,9 +158,7 @@ const MarketOverview = () => {
                   fill="url(#colorPrice)" 
                 />
               </RechartsAreaChart>
-            )}
-            
-            {chartType === "line" && (
+            ) : chartType === "line" ? (
               <RechartsLineChart
                 data={historicalData}
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
@@ -194,9 +191,7 @@ const MarketOverview = () => {
                   strokeWidth={2}
                 />
               </RechartsLineChart>
-            )}
-            
-            {chartType === "bar" && (
+            ) : (
               <RechartsBarChart
                 data={historicalData}
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
