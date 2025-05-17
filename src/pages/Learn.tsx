@@ -59,7 +59,7 @@ const learningContent = [
     timeToRead: "12 min",
     difficulty: "beginner" as const,
     link: "/learn/nft-basics",
-    image: "https://images.unsplash.com/photo-1642034454818-2c7915d82b0c?auto=format&w=800"
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&w=800"
   },
   {
     id: "technical-analysis",
