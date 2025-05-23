@@ -1,10 +1,11 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, Book, CheckCircle, ArrowRight, ArrowLeft, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import VideoPlaceholder from "@/components/VideoPlaceholder";
 
 const TradingBasics = () => {
   const [progress, setProgress] = useState(0);
@@ -93,9 +94,11 @@ const TradingBasics = () => {
                 <p className="course-description">Learn the fundamentals of cryptocurrency trading</p>
               </div>
               
-              <div className="video-placeholder">
-                <GraduationCap className="h-12 w-12 text-muted-foreground" />
-                <span className="ml-2 text-muted-foreground">Video Lecture Placeholder</span>
+              <div className="video-placeholder mb-6">
+                <VideoPlaceholder 
+                  title="Introduction to Cryptocurrency Trading" 
+                  videoId="Zoz9gvhLgpM"
+                />
               </div>
               
               <div className="course-content">
@@ -155,6 +158,13 @@ const TradingBasics = () => {
               <div className="course-module-header">
                 <h1 className="course-title">Market Analysis Basics</h1>
                 <p className="course-description">Understanding key analysis methods for cryptocurrency markets</p>
+              </div>
+              
+              <div className="video-placeholder mb-6">
+                <VideoPlaceholder 
+                  title="Market Analysis for Cryptocurrency" 
+                  videoId="Xin9dMvA8Qw"
+                />
               </div>
               
               <div className="course-content">
@@ -226,15 +236,29 @@ const TradingBasics = () => {
                 </p>
               </div>
               
-              <div className="flex justify-center items-center py-20">
+              <div className="video-placeholder mb-6">
+                <VideoPlaceholder 
+                  title={
+                    currentModule === 3 ? "Trading Strategies for Cryptocurrency" : 
+                    currentModule === 4 ? "Risk Management in Crypto Trading" : 
+                    "Trading Psychology and Mindset"
+                  }
+                  videoId={
+                    currentModule === 3 ? "tYULFJr0Bh0" : 
+                    currentModule === 4 ? "rMpzi8Ek7Hc" : 
+                    "N8-q1KxPnIM"
+                  }
+                />
+              </div>
+              
+              <div className="flex justify-center items-center">
                 <div className="text-center space-y-4">
-                  <GraduationCap className="h-16 w-16 text-primary mx-auto" />
                   <h2 className="text-xl font-semibold">Module Content Coming Soon</h2>
                   <p className="text-muted-foreground">This module is currently under development.</p>
                 </div>
               </div>
               
-              <div className="course-navigation">
+              <div className="course-navigation mt-12">
                 <Button variant="outline" onClick={() => setCurrentModule(currentModule - 1)}>
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Previous Module
