@@ -4,6 +4,7 @@ import { ChevronLeft, Book, CheckCircle, ArrowRight, ArrowLeft, GraduationCap } 
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import VideoPlaceholder from "@/components/VideoPlaceholder";
 
 const TechnicalAnalysis = () => {
   const [progress, setProgress] = useState(0);
