@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { User } from "lucide-react";
+import { User, BookOpen, CheckCircle, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -19,8 +19,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
 import AuthForm from "@/components/AuthForm";
 import { useAuth } from "@/hooks/useAuth";
+import { Link } from "react-router-dom";
+
+// Course data mapping
+const courses = [
+  { id: "blockchain-fundamentals", name: "Blockchain Fundamentals", path: "/learn/blockchain-fundamentals" },
+  { id: "trading-basics", name: "Trading Basics", path: "/learn/trading-basics" },
+  { id: "crypto-wallets", name: "Crypto Wallets", path: "/learn/crypto-wallets" },
+  { id: "defi-explained", name: "DeFi Explained", path: "/learn/defi-explained" },
+  { id: "nft-basics", name: "NFT Basics", path: "/learn/nft-basics" },
+  { id: "technical-analysis", name: "Technical Analysis", path: "/learn/technical-analysis" },
+];
 
 const UserMenu = () => {
   const [showAuthDialog, setShowAuthDialog] = useState(false);
@@ -40,6 +52,32 @@ const UserMenu = () => {
   const handleLogout = () => {
     logout();
   };
+
+  // Calculate total progress across all courses
+  const calculateOverallProgress = () => {
+    if (!user || !user.courseProgress) return 0;
+    
+    const totalCourses = courses.length;
+    let totalProgress = 0;
+    
+    // Count completed courses
+    user.completedCourses?.forEach(courseId => {
+      if (!user.courseProgress[courseId]) {
+        totalProgress += 100;
+      }
+    });
+    
+    // Add progress from in-progress courses
+    Object.entries(user.courseProgress).forEach(([courseId, progress]) => {
+      if (!user.completedCourses?.includes(courseId)) {
+        totalProgress += progress;
+      }
+    });
+    
+    return Math.round((totalProgress / (totalCourses * 100)) * 100) || 0;
+  };
+
+  const overallProgress = calculateOverallProgress();
 
   if (!isAuthenticated) {
     return (
@@ -78,17 +116,55 @@ const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="flex items-center">
+        <Button variant="outline" size="sm" className="flex items-center pr-3">
           <User className="h-4 w-4 mr-2" />
-          <span>{user?.username}</span>
+          <span className="mr-2">{user?.username}</span>
+          <div className="flex items-center gap-1 px-2 py-1 bg-secondary rounded-full text-xs">
+            <BarChart className="h-3 w-3" />
+            <span>{overallProgress}%</span>
+          </div>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuContent align="end" className="w-64">
+        <DropdownMenuLabel>Learning Progress</DropdownMenuLabel>
+        <div className="p-2">
+          <div className="flex justify-between items-center mb-1 text-xs">
+            <span>Overall progress</span>
+            <span className="font-medium">{overallProgress}%</span>
+          </div>
+          <Progress value={overallProgress} className="h-2 mb-3" />
+        </div>
+        
+        <DropdownMenuLabel>Course Status</DropdownMenuLabel>
+        <div className="max-h-60 overflow-y-auto py-1">
+          {courses.map(course => {
+            const progress = user?.courseProgress?.[course.id] || 0;
+            const isCompleted = user?.completedCourses?.includes(course.id) || progress === 100;
+            
+            return (
+              <DropdownMenuItem key={course.id} asChild className="py-2">
+                <Link to={course.path} className="flex items-center justify-between w-full cursor-pointer">
+                  <div className="flex items-center">
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    <span className="text-sm">{course.name}</span>
+                  </div>
+                  {isCompleted ? (
+                    <div className="flex items-center text-green-500">
+                      <CheckCircle className="h-4 w-4 mr-1" />
+                      <span className="text-xs">Complete</span>
+                    </div>
+                  ) : (
+                    <span className="text-xs">{progress}%</span>
+                  )}
+                </Link>
+              </DropdownMenuItem>
+            );
+          })}
+        </div>
+        
         <DropdownMenuSeparator />
         <DropdownMenuItem>Profile</DropdownMenuItem>
         <DropdownMenuItem>Settings</DropdownMenuItem>
-        <DropdownMenuItem>Favorites</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="text-destructive" onClick={handleLogout}>
           Logout

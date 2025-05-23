@@ -9,6 +9,10 @@ import {
 
 interface User {
   username: string;
+  courseProgress: {
+    [courseId: string]: number; // Stores progress percentage per course
+  };
+  completedCourses: string[]; // Stores IDs of completed courses
 }
 
 interface AuthContextType {
@@ -18,6 +22,8 @@ interface AuthContextType {
   login: (username: string, password: string) => Promise<void>;
   register: (username: string, password: string) => Promise<void>;
   logout: () => void;
+  updateCourseProgress: (courseId: string, progress: number) => void;
+  markCourseComplete: (courseId: string) => void;
 }
 
 // Create Auth Context
@@ -76,8 +82,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         users[username] = password;
         saveUsers(users);
         
-        // Log user in
-        const newUser = { username };
+        // Log user in with initial course progress
+        const newUser = { 
+          username,
+          courseProgress: {},
+          completedCourses: [] 
+        };
         localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
         setUser(newUser);
         
@@ -98,13 +108,78 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           return;
         }
         
-        const authenticatedUser = { username };
+        // Check if user has progress data, if not initialize it
+        const storedUser = localStorage.getItem(USER_STORAGE_KEY);
+        let authenticatedUser: User;
+        
+        if (storedUser) {
+          const parsedUser = JSON.parse(storedUser);
+          if (parsedUser.username === username) {
+            // Use existing progress data if username matches
+            authenticatedUser = parsedUser;
+          } else {
+            // Reset progress for different user
+            authenticatedUser = { 
+              username,
+              courseProgress: {},
+              completedCourses: [] 
+            };
+          }
+        } else {
+          // Initialize new progress data
+          authenticatedUser = { 
+            username,
+            courseProgress: {},
+            completedCourses: [] 
+          };
+        }
+        
         localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(authenticatedUser));
         setUser(authenticatedUser);
         
         resolve();
       }, 800); // Simulate network delay
     });
+  };
+
+  // Update course progress
+  const updateCourseProgress = (courseId: string, progress: number) => {
+    if (!user) return;
+    
+    const updatedUser = {
+      ...user,
+      courseProgress: {
+        ...user.courseProgress,
+        [courseId]: progress
+      }
+    };
+    
+    // If progress is 100%, mark course as completed
+    if (progress === 100 && !user.completedCourses.includes(courseId)) {
+      updatedUser.completedCourses = [...user.completedCourses, courseId];
+    }
+    
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(updatedUser));
+    setUser(updatedUser);
+  };
+  
+  // Mark course as complete
+  const markCourseComplete = (courseId: string) => {
+    if (!user) return;
+    
+    const updatedUser = {
+      ...user,
+      courseProgress: {
+        ...user.courseProgress,
+        [courseId]: 100
+      },
+      completedCourses: user.completedCourses.includes(courseId) 
+        ? user.completedCourses 
+        : [...user.completedCourses, courseId]
+    };
+    
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(updatedUser));
+    setUser(updatedUser);
   };
 
   // Logout user
@@ -121,7 +196,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         isLoading,
         login,
         register,
-        logout
+        logout,
+        updateCourseProgress,
+        markCourseComplete
       }}
     >
       {children}
