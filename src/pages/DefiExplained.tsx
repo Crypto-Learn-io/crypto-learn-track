@@ -1,23 +1,47 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, Book, CheckCircle, ArrowRight, ArrowLeft, GraduationCap } from "lucide-react";
+import { ChevronLeft, Book, CheckCircle, ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import VideoPlaceholder from "@/components/VideoPlaceholder";
+import { useAuth } from "@/hooks/useAuth";
 
 const DefiExplained = () => {
   const [progress, setProgress] = useState(0);
   const [currentModule, setCurrentModule] = useState(1);
+  const { user, updateCourseProgress, markCourseComplete } = useAuth();
   
   const totalModules = 4;
+  const courseId = "defi-explained";
+
+  // Load saved progress when component mounts
+  useEffect(() => {
+    if (user && user.courseProgress && user.courseProgress[courseId]) {
+      const savedProgress = user.courseProgress[courseId];
+      setProgress(savedProgress);
+      
+      // Calculate which module the user was on based on progress
+      const calculatedModule = Math.ceil((savedProgress / 100) * totalModules);
+      if (calculatedModule > 0 && calculatedModule <= totalModules) {
+        setCurrentModule(calculatedModule);
+      }
+    }
+  }, [user, courseId]);
 
   const handleModuleComplete = (moduleNum: number) => {
     const newProgress = Math.min((moduleNum / totalModules) * 100, 100);
     setProgress(newProgress);
     
+    // Update progress in auth context
+    updateCourseProgress && updateCourseProgress(courseId, newProgress);
+    
     if (moduleNum < totalModules) {
       setCurrentModule(moduleNum + 1);
+    } else if (moduleNum === totalModules) {
+      // Mark course as complete when final module is completed
+      markCourseComplete && markCourseComplete(courseId);
     }
   };
 
@@ -88,16 +112,13 @@ const DefiExplained = () => {
           {currentModule === 1 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold">Introduction to DeFi</h1>
+                <h1 className="text-3xl font-bold text-slate-900">Introduction to DeFi</h1>
                 <p className="text-muted-foreground">Understanding decentralized finance and its impact on traditional financial systems</p>
               </div>
               
-              <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center">
-                <GraduationCap className="h-12 w-12 text-muted-foreground" />
-                <span className="ml-2 text-muted-foreground">Video Lecture Placeholder</span>
-              </div>
+              <VideoPlaceholder videoId="SZXwDhcx9uY" title="Introduction to Decentralized Finance (DeFi)" />
               
-              <div className="prose max-w-none">
+              <div className="prose max-w-none text-slate-800">
                 <h2>What is DeFi?</h2>
                 <p>
                   Decentralized Finance (DeFi) refers to a new financial system built on public blockchains that aims to recreate and 
@@ -156,13 +177,13 @@ const DefiExplained = () => {
                 
                 <Accordion type="single" collapsible className="mt-6">
                   <AccordionItem value="faq-1">
-                    <AccordionTrigger>Is DeFi safe to use?</AccordionTrigger>
+                    <AccordionTrigger className="text-slate-900">Is DeFi safe to use?</AccordionTrigger>
                     <AccordionContent>
                       DeFi comes with risks that users should understand. Smart contract vulnerabilities, protocol exploits, and market volatility are all real concerns. However, established projects with audited code and time-tested protocols tend to be safer. Always do your own research and only invest what you can afford to lose.
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="faq-2">
-                    <AccordionTrigger>Do I need technical knowledge to use DeFi?</AccordionTrigger>
+                    <AccordionTrigger className="text-slate-900">Do I need technical knowledge to use DeFi?</AccordionTrigger>
                     <AccordionContent>
                       While understanding blockchain technology and how DeFi works can be helpful, many DeFi platforms now offer user-friendly interfaces that make it accessible to beginners. However, you should still take time to learn the basics to make informed decisions and avoid costly mistakes.
                     </AccordionContent>
@@ -183,11 +204,11 @@ const DefiExplained = () => {
           {currentModule === 2 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold">DeFi Components</h1>
+                <h1 className="text-3xl font-bold text-slate-900">DeFi Components</h1>
                 <p className="text-muted-foreground">Exploring the building blocks of decentralized finance</p>
               </div>
               
-              <div className="prose max-w-none">
+              <div className="prose max-w-none text-slate-800">
                 <h2>Core Components of the DeFi Ecosystem</h2>
                 
                 <h3>1. Stablecoins</h3>
@@ -267,7 +288,7 @@ const DefiExplained = () => {
           {currentModule > 2 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold">
+                <h1 className="text-3xl font-bold text-slate-900">
                   {currentModule === 3 ? "Popular DeFi Platforms" : "DeFi Risks & Challenges"}
                 </h1>
                 <p className="text-muted-foreground">
@@ -278,8 +299,13 @@ const DefiExplained = () => {
               
               <div className="flex justify-center items-center py-20">
                 <div className="text-center space-y-4">
-                  <GraduationCap className="h-16 w-16 text-primary mx-auto" />
-                  <h2 className="text-xl font-semibold">Module Content Coming Soon</h2>
+                  <div className="text-primary mx-auto">
+                    {currentModule === 3 ? 
+                      <VideoPlaceholder videoId="SZXwDhcx9uY" title="DeFi Platforms Overview" /> : 
+                      <VideoPlaceholder videoId="SZXwDhcx9uY" title="Understanding DeFi Risks" />
+                    }
+                  </div>
+                  <h2 className="text-xl font-semibold text-slate-900">Module Content Coming Soon</h2>
                   <p className="text-muted-foreground">This module is currently under development.</p>
                 </div>
               </div>

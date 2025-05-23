@@ -1,23 +1,47 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, Book, CheckCircle, ArrowRight, ArrowLeft, GraduationCap } from "lucide-react";
+import { ChevronLeft, Book, CheckCircle, ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import VideoPlaceholder from "@/components/VideoPlaceholder";
+import { useAuth } from "@/hooks/useAuth";
 
 const CryptoWallets = () => {
   const [progress, setProgress] = useState(0);
   const [currentModule, setCurrentModule] = useState(1);
+  const { user, updateCourseProgress, markCourseComplete } = useAuth();
   
   const totalModules = 3;
+  const courseId = "crypto-wallets";
+
+  // Load saved progress when component mounts
+  useEffect(() => {
+    if (user && user.courseProgress && user.courseProgress[courseId]) {
+      const savedProgress = user.courseProgress[courseId];
+      setProgress(savedProgress);
+      
+      // Calculate which module the user was on based on progress
+      const calculatedModule = Math.ceil((savedProgress / 100) * totalModules);
+      if (calculatedModule > 0 && calculatedModule <= totalModules) {
+        setCurrentModule(calculatedModule);
+      }
+    }
+  }, [user, courseId]);
 
   const handleModuleComplete = (moduleNum: number) => {
     const newProgress = Math.min((moduleNum / totalModules) * 100, 100);
     setProgress(newProgress);
     
+    // Update progress in auth context
+    updateCourseProgress && updateCourseProgress(courseId, newProgress);
+    
     if (moduleNum < totalModules) {
       setCurrentModule(moduleNum + 1);
+    } else if (moduleNum === totalModules) {
+      // Mark course as complete when final module is completed
+      markCourseComplete && markCourseComplete(courseId);
     }
   };
 
@@ -87,16 +111,13 @@ const CryptoWallets = () => {
           {currentModule === 1 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold">Understanding Crypto Wallets</h1>
+                <h1 className="text-3xl font-bold text-slate-900">Understanding Crypto Wallets</h1>
                 <p className="text-muted-foreground">Learn the different types of cryptocurrency wallets and their features</p>
               </div>
               
-              <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center">
-                <GraduationCap className="h-12 w-12 text-muted-foreground" />
-                <span className="ml-2 text-muted-foreground">Video Lecture Placeholder</span>
-              </div>
+              <VideoPlaceholder videoId="SQyg9pyJ1Ac" title="Introduction to Cryptocurrency Wallets" />
               
-              <div className="prose max-w-none">
+              <div className="prose max-w-none text-slate-800">
                 <h2>What is a Cryptocurrency Wallet?</h2>
                 <p>
                   A cryptocurrency wallet is a tool that allows you to store and access your cryptocurrency. Unlike traditional wallets, 
@@ -131,14 +152,14 @@ const CryptoWallets = () => {
                 
                 <Accordion type="single" collapsible className="mt-6">
                   <AccordionItem value="faq-1">
-                    <AccordionTrigger>What's the difference between private and public keys?</AccordionTrigger>
+                    <AccordionTrigger className="text-slate-900">What's the difference between private and public keys?</AccordionTrigger>
                     <AccordionContent>
                       <p><strong>Public Key:</strong> This is your wallet address, which you can share with others to receive funds. It's like your email address.</p>
                       <p><strong>Private Key:</strong> This is the secret code that gives you access to your cryptocurrency. Never share it with anyone - it's like the password to your email.</p>
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="faq-2">
-                    <AccordionTrigger>Which wallet is best for beginners?</AccordionTrigger>
+                    <AccordionTrigger className="text-slate-900">Which wallet is best for beginners?</AccordionTrigger>
                     <AccordionContent>
                       For beginners, a reputable mobile wallet like Trust Wallet or Coinbase Wallet offers a good balance of security and usability. As you gain experience and accumulate more crypto assets, consider investing in a hardware wallet like Ledger or Trezor for enhanced security.
                     </AccordionContent>
@@ -159,11 +180,11 @@ const CryptoWallets = () => {
           {currentModule === 2 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold">Security Best Practices</h1>
+                <h1 className="text-3xl font-bold text-slate-900">Security Best Practices</h1>
                 <p className="text-muted-foreground">Essential security measures to keep your cryptocurrency safe</p>
               </div>
               
-              <div className="prose max-w-none">
+              <div className="prose max-w-none text-slate-800">
                 <h2>Securing Your Crypto Assets</h2>
                 <p>
                   Security is paramount in the cryptocurrency world. Without proper security practices, you risk losing your assets permanently.
@@ -222,11 +243,11 @@ const CryptoWallets = () => {
           {currentModule === 3 && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold">Managing Your Keys</h1>
+                <h1 className="text-3xl font-bold text-slate-900">Managing Your Keys</h1>
                 <p className="text-muted-foreground">Best practices for private key and seed phrase management</p>
               </div>
               
-              <div className="prose max-w-none">
+              <div className="prose max-w-none text-slate-800">
                 <h2>Understanding Seed Phrases</h2>
                 <p>
                   A seed phrase (also called a recovery phrase or mnemonic phrase) is a series of words that store all the information needed to recover a cryptocurrency wallet.

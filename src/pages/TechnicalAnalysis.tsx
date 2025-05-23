@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, Book, CheckCircle, ArrowRight, ArrowLeft, GraduationCap } from "lucide-react";
@@ -92,10 +91,7 @@ const TechnicalAnalysis = () => {
                 <p className="course-description">Learn to read and interpret different types of price charts</p>
               </div>
               
-              <div className="video-placeholder">
-                <GraduationCap className="h-12 w-12 text-muted-foreground" />
-                <span className="ml-2 text-muted-foreground">Video Lecture Placeholder</span>
-              </div>
+              <VideoPlaceholder videoId="eynxyoKgpng" title="Introduction to Technical Analysis" />
               
               <div className="course-content">
                 <h2>Introduction to Technical Analysis</h2>
