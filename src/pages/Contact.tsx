@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "@/components/Header";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, DollarSign } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -19,7 +19,7 @@ const Contact = () => {
         </section>
 
         {/* Contact Information */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -61,6 +61,28 @@ const Contact = () => {
                   <span>Closed</span>
                 </p>
               </div>
+            </CardContent>
+          </Card>
+          
+          {/* Donation Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <DollarSign className="h-5 w-5 text-crypto-primary" />
+                Support Us
+              </CardTitle>
+              <CardDescription>
+                Help us continue providing valuable crypto education
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="font-medium mb-2">Donate via CashApp:</p>
+              <p className="text-lg font-bold text-crypto-primary">#Zequantum</p>
+              <Button className="mt-4" asChild variant="outline">
+                <a href="https://cash.app/$Zequantum" target="_blank" rel="noopener noreferrer">
+                  Open CashApp
+                </a>
+              </Button>
             </CardContent>
           </Card>
         </div>
