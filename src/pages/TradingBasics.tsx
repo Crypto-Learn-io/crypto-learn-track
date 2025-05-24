@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, Book, CheckCircle, ArrowRight, ArrowLeft, GraduationCap } from "lucide-react";
@@ -94,11 +93,16 @@ const TradingBasics = () => {
                 <p className="course-description">Learn the fundamentals of cryptocurrency trading</p>
               </div>
               
-              <div className="video-placeholder mb-6">
-                <VideoPlaceholder 
-                  title="Introduction to Cryptocurrency Trading" 
-                  videoId="Zoz9gvhLgpM"
-                />
+              <div className="mb-6">
+                <div className="w-full h-[60vh] rounded-lg overflow-hidden border border-slate-200">
+                  <iframe
+                    src="https://www.youtube.com/embed/Zoz9gvhLgpM?rel=0"
+                    title="Introduction to Cryptocurrency Trading"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full border-0"
+                  ></iframe>
+                </div>
               </div>
               
               <div className="course-content">
@@ -160,11 +164,16 @@ const TradingBasics = () => {
                 <p className="course-description">Understanding key analysis methods for cryptocurrency markets</p>
               </div>
               
-              <div className="video-placeholder mb-6">
-                <VideoPlaceholder 
-                  title="Market Analysis for Cryptocurrency" 
-                  videoId="Xin9dMvA8Qw"
-                />
+              <div className="mb-6">
+                <div className="w-full h-[60vh] rounded-lg overflow-hidden border border-slate-200">
+                  <iframe
+                    src="https://www.youtube.com/embed/lGhFX4Pwj6Y?rel=0&t=108"
+                    title="Market Analysis for Cryptocurrency"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full border-0"
+                  ></iframe>
+                </div>
               </div>
               
               <div className="course-content">
