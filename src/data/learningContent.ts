@@ -58,6 +58,6 @@ export const learningContent = [
     timeToRead: "30 min",
     difficulty: "intermediate" as const,
     link: "/learn/technical-analysis",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&w=800"
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&w=800"
   },
 ];
