@@ -6,14 +6,16 @@ import LearnCard from "@/components/LearnCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search } from "lucide-react";
+import { Search, UserPlus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { learningContent } from "@/data/learningContent";
+import { useAuth } from "@/hooks/useAuth";
 
 const Learn = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const { isAuthenticated } = useAuth();
   
   // Extract unique categories
   const categories = ["all", ...Array.from(new Set(learningContent.map(item => item.category)))];
@@ -41,9 +43,19 @@ const Learn = () => {
           <div className="crypto-gradient rounded-lg p-6 md:p-8 text-white">
             <div className="max-w-3xl">
               <h1 className="text-3xl md:text-4xl font-bold mb-4">Learn Crypto & Fintech</h1>
-              <p className="text-lg opacity-90 mb-6">
+              <p className="text-lg opacity-90 mb-4">
                 Expand your knowledge with our curated educational resources designed for all skill levels.
               </p>
+              {!isAuthenticated && (
+                <div className="bg-white/10 rounded-lg p-4 mb-6 border border-white/20">
+                  <div className="flex items-center gap-3">
+                    <UserPlus className="h-5 w-5" />
+                    <span className="text-sm font-medium">
+                      Create your account to track your progress and save your learning achievements!
+                    </span>
+                  </div>
+                </div>
+              )}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input 
