@@ -30,7 +30,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <Header />
       
       <main className="flex-grow container px-4 py-6 md:py-8">
@@ -112,7 +112,7 @@ const Index = () => {
         </section>
       </main>
       
-      <footer className="border-t border-border py-6">
+      <footer className="border-t border-border py-6 bg-background">
         <div className="container px-4 text-center text-sm text-muted-foreground">
           <p>© 2025 CryptoLearn. All rights reserved.</p>
           <p className="mt-1">Market data provided for educational purposes only.</p>
