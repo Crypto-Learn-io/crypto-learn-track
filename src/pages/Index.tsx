@@ -9,6 +9,8 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
+  console.log("Index page is rendering");
+  
   // Featured learning content
   const featuredLearning = [
     {
@@ -28,6 +30,8 @@ const Index = () => {
       link: "/learn/trading-basics"
     }
   ];
+
+  console.log("Featured learning data:", featuredLearning);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -60,7 +64,9 @@ const Index = () => {
         {/* Market Overview Section */}
         <section className="mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <MarketOverview />
+            <div className="md:col-span-2">
+              <MarketOverview />
+            </div>
             
             <Card>
               <CardHeader>
