@@ -25,7 +25,7 @@ const App = () => (
       <AuthProvider>
         <Toaster />
         <Sonner />
-        <HashRouter>
+        <HashRouter basename="/">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/coin/:id" element={<CoinDetail />} />
@@ -37,7 +37,6 @@ const App = () => (
             <Route path="/learn/nft-basics" element={<NftBasics />} />
             <Route path="/learn/technical-analysis" element={<TechnicalAnalysis />} />
             <Route path="/contact" element={<Contact />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </HashRouter>
