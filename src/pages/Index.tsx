@@ -34,7 +34,7 @@ const Index = () => {
   console.log("Featured learning data:", featuredLearning);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Header />
       
       <main className="flex-grow container px-4 py-6 md:py-8">
@@ -42,15 +42,15 @@ const Index = () => {
         <section className="mb-8">
           <div className="crypto-gradient rounded-lg p-6 md:p-8 text-white">
             <div className="max-w-3xl">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">Track, Learn, and Master Crypto</h1>
-              <p className="text-lg opacity-90 mb-6">
+              <h1 className="text-3xl md:text-4xl font-bold mb-4 text-white">Track, Learn, and Master Crypto</h1>
+              <p className="text-lg text-white/90 mb-6">
                 Real-time market data and educational resources to help you navigate the world of cryptocurrency.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-white text-crypto-primary hover:bg-white/90">
+                <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-100 font-semibold">
                   Get Started
                 </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20" asChild>
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20 font-semibold" asChild>
                   <Link to="/learn">
                     <BookOpen className="mr-2 h-5 w-5" />
                     Explore Tutorials
@@ -68,26 +68,26 @@ const Index = () => {
               <MarketOverview />
             </div>
             
-            <Card>
+            <Card className="bg-card text-card-foreground">
               <CardHeader>
-                <CardTitle className="text-xl">Market Stats</CardTitle>
+                <CardTitle className="text-xl text-foreground">Market Stats</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <p className="text-sm text-muted-foreground">Total Market Cap</p>
-                  <p className="text-2xl font-semibold">$2.56T</p>
+                  <p className="text-2xl font-semibold text-foreground">$2.56T</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">24h Volume</p>
-                  <p className="text-2xl font-semibold">$128.3B</p>
+                  <p className="text-2xl font-semibold text-foreground">$128.3B</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">BTC Dominance</p>
-                  <p className="text-2xl font-semibold">52.4%</p>
+                  <p className="text-2xl font-semibold text-foreground">52.4%</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Active Cryptocurrencies</p>
-                  <p className="text-2xl font-semibold">10,482</p>
+                  <p className="text-2xl font-semibold text-foreground">10,482</p>
                 </div>
               </CardContent>
             </Card>
@@ -102,9 +102,9 @@ const Index = () => {
         {/* Learning Section */}
         <section>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold">Start Learning</h2>
+            <h2 className="text-2xl font-bold text-foreground">Start Learning</h2>
             <Button variant="ghost" asChild>
-              <Link to="/learn" className="flex items-center">
+              <Link to="/learn" className="flex items-center text-foreground hover:text-foreground/80">
                 View All
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
